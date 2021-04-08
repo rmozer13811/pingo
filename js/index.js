@@ -1,9 +1,11 @@
+// fechar
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const crashSound = new Audio();
-crashSound.src = "./sounds/car-crash.wav";
-crashSound.volume = 0.1;
+const barksound = new Audio();
+barksound.src = "/sounds/bark.mp3.mp3";
+barksound.volume = 0.4;
 
 class GameObject {
   constructor(x, y, width, height, img) {
@@ -18,16 +20,6 @@ class GameObject {
 
   updatePosition() {
     this.x += this.speedX;
-
-    // 10 e 40 são valores pro carro não sair do asfalto, e parar alguns pixels antes de chegar na grama
-
-    if (this.x <= this.width - 10) {
-      this.x = this.width - 10;
-    }
-
-    if (this.x >= canvas.width - (this.width + 40)) {
-      this.x = canvas.width - (this.width + 40);
-    }
 
     this.y += this.speedY;
   }
@@ -51,40 +43,68 @@ class GameObject {
 
   crashWith(obstacle) {
     return !(
-      this.bottom() < obstacle.top() ||
-      this.top() > obstacle.bottom() ||
-      this.right() < obstacle.left() ||
-      this.left() > obstacle.right()
+      this.bottom() - 5 < obstacle.top() ||
+      this.top() + 25 > obstacle.bottom() ||
+      this.right() - 50 < obstacle.left() ||
+      this.left() + 25 > obstacle.right()
     );
+  }
+}
+
+class Player extends GameObject {
+  constructor(x, y, width, height, img) {
+    super(x, y, width, height, img);
+  }
+  updatePosition() {
+    if (this.x <= 0) {
+      this.x = 0;
+    }
+    if (this.y <= 0) {
+      this.y = 0;
+    }
+    if (this.x >= canvas.width - this.width) {
+      this.x = canvas.width - this.width;
+    }
+
+    if (this.y >= canvas.height - this.height) {
+      this.y = canvas.height - this.height;
+    }
+
+    this.x += this.speedX;
+
+    this.y += this.speedY;
   }
 }
 
 class BackgroundImage extends GameObject {
   constructor(x, y, width, height, img) {
     super(x, y, width, height, img);
-    this.speedY = 3;
+    this.speedX = -3;
   }
 
   updatePosition() {
-    this.y += this.speedY;
-    this.y %= canvas.height;
+    this.x += this.speedX;
+    this.x %= canvas.width;
   }
 
   draw() {
-    ctx.drawImage(this.img, 0, this.y, this.width, this.height);
-    ctx.drawImage(this.img, 0, this.y - canvas.height, this.width, this.height);
+    ctx.drawImage(this.img, this.x, 0, this.width, this.height);
+    ctx.drawImage(this.img, this.x + canvas.width, 0, this.width, this.height);
   }
 }
+
+const shampoo = new Image();
+shampoo.src = "/images/pngwing.com.png";
 
 class Obstacle extends GameObject {
   constructor(x, y, width, height) {
     super(x, y, width, height);
-    this.speedY = 3;
-  }
-
-  draw() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.x = 1200;
+    this.y = Math.floor(Math.random() * 600 - 100 - height) + height;
+    this.speedX = -7;
+    this.speedY = 0;
+    this.img = shampoo;
+    this.width = 100;
   }
 }
 
@@ -128,19 +148,8 @@ class Game {
       this.obstacles[i].draw();
     }
 
-    if (this.frames % 120 === 0) {
-      const originY = 0;
-
-      const minX = 50;
-      const maxX = 100;
-      const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-
-      const minWidth = 50;
-      const maxWidth = 240;
-      const randomWidth =
-        Math.floor(Math.random() * (maxWidth - minWidth + 1)) + minWidth;
-
-      const obstacle = new Obstacle(randomX, originY, randomWidth, 20);
+    if (this.frames % 40 === 0) {
+      const obstacle = new Obstacle(this.x, this.y, 75, 150);
 
       this.obstacles.push(obstacle);
 
@@ -154,7 +163,7 @@ class Game {
     });
 
     if (crashed) {
-      crashSound.play();
+      barksound.play();
 
       cancelAnimationFrame(this.animationId);
 
@@ -164,22 +173,18 @@ class Game {
 
   updateScore() {
     ctx.font = "30px Verdana";
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "black";
     ctx.fillText(`Score: ${this.score}`, 80, 40);
   }
 
   gameOver() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "red";
     ctx.font = "60px Verdana";
-    ctx.fillText("Game Over!", canvas.width / 6, 200);
+    ctx.fillText("Game Over!", 400, 100);
 
     ctx.font = "30px Verdana";
-    ctx.fillStyle = "white";
-    ctx.fillText(`Your Final Score: ${this.score}`, canvas.width / 6, 400);
+    ctx.fillStyle = "black";
+    ctx.fillText(`Your Final Score: ${this.score}`, 435, 150);
   }
 
   clear = () => {
@@ -188,12 +193,11 @@ class Game {
 }
 
 function startGame() {
-  // Instanciando todas as imagens
   const bgImg = new Image();
-  bgImg.src = "./images/road.png";
+  bgImg.src = "../images/background.png";
 
-  const carImg = new Image();
-  carImg.src = "./images/car.png";
+  const playerImg = new Image();
+  playerImg.src = "../images/Caxorro-salsixa-1.png.png";
 
   const backgroundImage = new BackgroundImage(
     0,
@@ -202,7 +206,7 @@ function startGame() {
     canvas.height,
     bgImg
   );
-  const player = new GameObject(250 - 25, canvas.height - 120, 50, 100, carImg);
+  const player = new Player(50, 300, 100, 100, playerImg);
 
   const game = new Game(backgroundImage, player);
 
@@ -210,19 +214,26 @@ function startGame() {
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "ArrowLeft") {
-      game.player.speedX = -3;
+      game.player.speedX = -10;
     } else if (event.code === "ArrowRight") {
-      game.player.speedX = 3;
+      game.player.speedX = 10;
+    } else if (event.code === "ArrowUp") {
+      game.player.speedY = -10;
+    } else if (event.code === "ArrowDown") {
+      game.player.speedY = 10;
     }
   });
 
   document.addEventListener("keyup", () => {
     game.player.speedX = 0;
+    game.player.speedY = 0;
   });
 }
 
 window.onload = () => {
-  document.getElementById("start-button").onclick = () => {
+  const startbtn = document.getElementById("start-button");
+  startbtn.onclick = () => {
+    startbtn.blur();
     startGame();
   };
 };

@@ -10,29 +10,24 @@ body {
 
 .game-intro p {
   font-size: 18px;
-  font-family: "Verdana"
-}
-
-.logo-img {
-  width: 350px;
-}
-
-.arrows-img {
-  width: 150px;
+  font-family: "Verdana";
 }
 
 body button {
-  font-size: 30px;
-  background-color: #870007;
-  color: #fff;
+  font-size: 42px;
+  background-color: #0ecbec;
+  color: rgb(0, 0, 0);
   padding: 20px 40px;
   border: 0;
   box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  border-radius: 20px;
+  margin-bottom: 5px;
+}
+button::active {
+  box-shadow: none;
 }
 
 #game-board {
-    float: left;
-    padding: 20px 0px;
+  float: center;
+  padding: 20px 20px;
 }
