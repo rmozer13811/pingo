@@ -86,6 +86,7 @@ class BackgroundImage extends GameObject {
   }
 
   draw() {
+    console.log(this.img);
     ctx.drawImage(this.img, this.x, 0, this.width, this.height);
     ctx.drawImage(this.img, this.x + canvas.width, 0, this.width, this.height);
   }
