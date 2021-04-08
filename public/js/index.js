@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const bgImg = new Image();
-bgImg.src = "../images/background.png";
+bgImg.src = "../images/Caxorro-salsixa-1.png.png";
 
 const playerImg = new Image();
 playerImg.src = "../images/Caxorro-salsixa-1.png.png";
