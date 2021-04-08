@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const bgImg = new Image();
-bgImg.src = "../images/Caxorro-salsixa-1.png.png";
+bgImg.src = "../images/background.png";
 
 const playerImg = new Image();
 playerImg.src = "../images/Caxorro-salsixa-1.png.png";
@@ -92,9 +92,9 @@ class BackgroundImage extends GameObject {
   }
 
   draw() {
-    console.log(this.img);
-    ctx.drawImage(this.img, this.x, 0, this.width, this.height);
-    ctx.drawImage(this.img, this.x + canvas.width, 0, this.width, this.height);
+    // console.log(this.img);
+    // ctx.drawImage(this.img, this.x, 0, this.width, this.height);
+    // ctx.drawImage(this.img, this.x + canvas.width, 0, this.width, this.height);
   }
 }
 
