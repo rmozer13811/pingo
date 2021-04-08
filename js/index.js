@@ -1,8 +1,14 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const bgImg = new Image();
+bgImg.src = "../images/background.png";
+
+const playerImg = new Image();
+playerImg.src = "../images/Caxorro-salsixa-1.png.png";
+
 const barksound = new Audio();
-barksound.src = "./sounds/bark.mp3.mp3";
+barksound.src = "../sounds/bark.mp3.mp3";
 barksound.volume = 0.4;
 
 class GameObject {
@@ -192,12 +198,6 @@ class Game {
 }
 
 function startGame() {
-  const bgImg = new Image();
-  bgImg.src = "../images/background.png";
-
-  const playerImg = new Image();
-  playerImg.src = "../images/Caxorro-salsixa-1.png.png";
-
   const backgroundImage = new BackgroundImage(
     0,
     0,
