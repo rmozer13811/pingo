@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const barksound = new Audio();
-barksound.src = "/sounds/bark.mp3.mp3";
+barksound.src = "./sounds/bark.mp3.mp3";
 barksound.volume = 0.4;
 
 class GameObject {
@@ -92,7 +92,7 @@ class BackgroundImage extends GameObject {
 }
 
 const shampoo = new Image();
-shampoo.src = "/images/pngwing.com.png";
+shampoo.src = "../images/pngwing.com.png";
 
 class Obstacle extends GameObject {
   constructor(x, y, width, height) {
