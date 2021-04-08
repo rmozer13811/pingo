@@ -3,6 +3,20 @@ body {
   text-align: center;
 }
 
+#pingo {
+  font-size: xx-large;
+  color: black;
+  font-family: Verdana;
+}
+
+#gif {
+  width: 5;
+}
+
+#sub {
+  font-size: large;
+  color: gray;
+}
 .game-intro {
   float: left;
   padding: 0% 10%;
@@ -15,12 +29,12 @@ body {
 
 body button {
   font-size: 42px;
-  background-color: #0ecbec;
+  background-color: grey;
   color: rgb(0, 0, 0);
   padding: 20px 40px;
   border: 0;
-  box-shadow: 0;
-  border-radius: 20px;
+  box-shadow: 1;
+  border-radius: 200px;
   margin-bottom: 5px;
 }
 button::active {
