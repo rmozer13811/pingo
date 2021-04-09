@@ -213,13 +213,18 @@ function startGame() {
   game.start();
 
   document.addEventListener("keydown", (event) => {
+    event.preventDefault();
+
     if (event.code === "ArrowLeft") {
       game.player.speedX = -10;
-    } else if (event.code === "ArrowRight") {
+    }
+    if (event.code === "ArrowRight") {
       game.player.speedX = 10;
-    } else if (event.code === "ArrowUp") {
+    }
+    if (event.code === "ArrowUp") {
       game.player.speedY = -10;
-    } else if (event.code === "ArrowDown") {
+    }
+    if (event.code === "ArrowDown") {
       game.player.speedY = 10;
     }
   });
