@@ -6,6 +6,8 @@ barksound.src = "./sounds/bark.mp3.mp3";
 barksound.volume = 0.4;
 
 var musicafundo = (document.getElementById("bgmback").volume = 0.3);
+let gameHasStarted = false;
+let level;
 
 class GameObject {
   constructor(x, y, width, height, img) {
@@ -100,7 +102,7 @@ class Obstacle extends GameObject {
   constructor(x, y, width, height) {
     super(x, y, width, height);
     this.x = 1200;
-    this.y = Math.floor(Math.random() * 600 - 100 - height) + height;
+    this.y = Math.floor(Math.random() * 500);
     this.speedX = -7;
     this.speedY = 0;
     this.img = shampoo;
@@ -148,7 +150,8 @@ class Game {
       this.obstacles[i].draw();
     }
 
-    if (this.frames % 40 === 0) {
+    level = parseInt(document.getElementById("game-speed").value);
+    if (this.frames % level === 0) {
       const obstacle = new Obstacle(this.x, this.y, 75, 150);
 
       this.obstacles.push(obstacle);
@@ -185,6 +188,7 @@ class Game {
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.fillText(`Your Final Score: ${this.score}`, 435, 150);
+    gameHasStarted = false;
   }
 
   clear = () => {
@@ -193,6 +197,10 @@ class Game {
 }
 
 function startGame() {
+  if (gameHasStarted) {
+    return;
+  }
+  gameHasStarted = true;
   const bgImg = new Image();
   bgImg.src = "./images/background.png";
 
