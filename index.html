@@ -6,23 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./styles/style.css" />
     <title>Pingo's Game</title>
+    <link rel="shortcut icon" href="./images/Caxorro-salsixa.gif" />
   </head>
-  <body>
-    <div id="pingo">Pingo's Game</div>
+  <body background="./images/rm31-jj-01-d-concrete_2.jpg">
+    <p id="pingo">Pingo's Game</p>
     <div id="sub">
-      The legend of the sausage dog that doesn't like bathing <br />
-      Use the arrows to avoid the bath
-    </div>
-    <div id="gif">
-      <img src="./images/Caxorro-salsixa.gif" alt="" width="100" height="100" />
+      The legend of the wiener dog that doesn't like bathing <br />
+      Use the arrows keys to avoid the bath shampoo
     </div>
 
     <br />
 
-    <audio autoplay loop>
-      <source src="./sounds/bgMusic.mp3" type="audio/mp3" />
+    <audio id="bgmback" autoplay loop>
+      <source src="./sounds/bgMusic.mp3" />
     </audio>
     <button id="start-button">Play!</button>
+
     <div id="game-board">
       <canvas id="canvas" width="1200" height="600"> </canvas>
     </div>

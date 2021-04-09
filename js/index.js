@@ -5,6 +5,8 @@ const barksound = new Audio();
 barksound.src = "./sounds/bark.mp3.mp3";
 barksound.volume = 0.4;
 
+var musicafundo = (document.getElementById("bgmback").volume = 0.3);
+
 class GameObject {
   constructor(x, y, width, height, img) {
     this.x = x;
@@ -170,17 +172,17 @@ class Game {
   };
 
   updateScore() {
-    ctx.font = "30px Verdana";
+    ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.fillText(`Score: ${this.score}`, 80, 40);
   }
 
   gameOver() {
     ctx.fillStyle = "black";
-    ctx.font = "60px Verdana";
+    ctx.font = "60px Arial";
     ctx.fillText("Game Over!", 400, 100);
 
-    ctx.font = "30px Verdana";
+    ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.fillText(`Your Final Score: ${this.score}`, 435, 150);
   }
@@ -231,7 +233,6 @@ function startGame() {
 window.onload = () => {
   const startbtn = document.getElementById("start-button");
   startbtn.onclick = () => {
-    startbtn.blur();
     startGame();
   };
 };

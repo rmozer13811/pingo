@@ -6,39 +6,38 @@ body {
 #pingo {
   font-size: xx-large;
   color: black;
-  font-family: Verdana;
-}
-
-#gif {
-  width: 5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
 }
 
 #sub {
   font-size: large;
-  color: gray;
-}
-.game-intro {
-  float: left;
-  padding: 0% 10%;
-}
-
-.game-intro p {
-  font-size: 18px;
-  font-family: "Verdana";
+  color: black;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body button {
   font-size: 42px;
-  background-color: grey;
-  color: rgb(0, 0, 0);
-  padding: 20px 40px;
+  background-color: #4caf50;
+  color: black;
+  font-weight: lighter;
+  padding: 20px 60px;
   border: 0;
-  box-shadow: 1;
-  border-radius: 200px;
+  border-radius: 50px;
   margin-bottom: 5px;
+  cursor: pointer;
+  box-shadow: 0 9px #999;
 }
-button::active {
-  box-shadow: none;
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 #game-board {
